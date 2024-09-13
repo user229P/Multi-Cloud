@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Azure vs AWS Comparison</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f4f4f9;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: #0066cc;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        .content {
+            width: 80%;
+            margin: 20px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            font-size: 2.5em;
+        }
+
+        h2 {
+            color: #0066cc;
+            border-bottom: 2px solid #0066cc;
+            padding-bottom: 5px;
+            margin-top: 20px;
+        }
+
+        .btn-custom {
+            color: white;
+            background-color: #0066cc;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            margin-top: 20px;
+            display: inline-block;
+        }
+
+        .btn-custom:hover {
+            background-color: #005bb5;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Azure vs AWS: A Comprehensive Comparison</h1>
+    </header>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        <div>
+            {% for category, message in messages %}
+                <div class="alert alert-info alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+    {% endwith %}
+    <div class="content">
+        <h2>Performance</h2>
+        <p>
+            AWS Lambda execution time: {{ aws_execution_time }} ms<br>
+            Azure Functions execution time: {{ azure_execution_time }} ms
+        </p>
+
+        <h2>Cost</h2>
+        <p>
+            AWS Lambda cost for this task: ${{ aws_cost }}<br>
+            Azure Functions cost for this task: ${{ azure_cost }}
+        </p>
+
+        <h2>Scalability</h2>
+        <p>
+            AWS Lambda handled {{ aws_scalability_tests }} concurrent requests without issue.<br>
+            Azure Functions handled {{ azure_scalability_tests }} concurrent requests without issue.
+        </p>
+
+        <h2>Ease of Use</h2>
+        <p>
+            AWS Lambda setup time: {{ aws_setup_time }} minutes.<br>
+            Azure Functions setup time: {{ azure_setup_time }} minutes.
+        </p>
+
+        <h2>Security and Reliability</h2>
+        <p>
+            Both services provide robust security features and were reliable during the tests.
+        </p>
+
+        <p><a href="{{ url_for('index') }}" class="btn btn-custom">Return to Home</a></p>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>

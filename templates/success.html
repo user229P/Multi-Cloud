@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Success</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #0066cc;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        .content {
+            width: 80%;
+            margin: 20px auto;
+            padding: 20px;
+            text-align: center;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        .metrics {
+            margin-top: 20px;
+        }
+
+        .metrics p {
+            font-size: 18px;
+            margin: 5px 0;
+        }
+
+        .btn-custom {
+            color: white;
+            background-color: #007bff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .btn-custom:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Processing Success</h1>
+    </header>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        <div>
+            {% for category, message in messages %}
+                <div class="alert alert-info alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+    {% endwith %}
+    <div class="content">
+        <h1>Processing Result</h1>
+        <p class="h2 text-center my-3">Here is your processed image:</p>
+        <div class="row">
+            <div class="col-md-6">
+                {% if service == 'aws' %}
+                    <h2>AWS Lambda Results</h2>
+                    <div class="metrics">
+                        <p>Execution Time: {{ aws_execution_time }} seconds</p>
+                        <!-- <p>Cost: ${{ aws_cost }}</p>
+                        <p>Scalability Tests: {{ aws_scalability_tests }}</p>
+                        <p>Setup Time: {{ aws_setup_time }} minutes</p> -->
+                    </div>
+                {% elif service == 'azure' %}
+                    <!-- <h2>Azure Functions Results</h2> -->
+                    <div class="metrics">
+                        <p>Execution Time: {{ azure_execution_time }} seconds</p>
+                        <!-- <p>Cost: ${{ azure_cost }}</p>
+                        <p>Scalability Tests: {{ azure_scalability_tests }}</p>
+                        <p>Setup Time: {{ azure_setup_time }} minutes</p> -->
+                    </div>
+                {% endif %}
+
+            </div>
+            <div class="col-md-6">
+                <img src="{{ url_for('static', filename='uploads/' + processed_image) }}" class="img-fluid" alt="Processed Image">
+            </div>
+        </div>
+        <a href="/" class="btn btn-custom mt-4">Upload Another File</a>
+    </div>
+</body>
+</html>
